@@ -73,7 +73,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
 // ------> Feed <----- //
 userRouter.get("/feed", userAuth, async (req, res) => {
   try {
-    // User should see all t he user cards except
+    // User should see all the user cards except
     // 0. his own card
     // 1. his connections
     // 2. ignored people
@@ -85,7 +85,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
     limit = limit > 50 ? 50 : limit;
     const skip = (page - 1) * limit;
 
-    // Find all connecton requests for the logged in user
+    // Find all connection requests for the loggedIn user
     const connectionRequests = await ConnectionRequestModel.find({
       $or: [
         { fromUserId: loggedInUser._id },

@@ -57,8 +57,9 @@ requestRouter.post(
       // Save the connection request to the database
       const data = await connectionRequest.save();
 
+      // Send a success response to the client
       res.status(200).json({
-        message: `${req.user.firstName} is ${status} to send connection request to ${toUser.firstName}`,
+        message: `${req.user.firstName} is ${status} ${status === "interested" ? "in" : "by"}  ${toUser.firstName}`,
         data,
       });
     } catch (error) {

@@ -34,7 +34,7 @@ const validateProfilePassword = (req) => {
   const user = req.user;
   const isMatchedPassword = bcrypt.compareSync(newPassword, user.password);
   if (isMatchedPassword) {
-    throw new Error("Password already exists, please enter new password");
+    throw new Error("Password cannot be same as old password please update new password");
   }
   const isValidProfilePassword = validator.isStrongPassword(newPassword);
   return isValidProfilePassword;

@@ -12,19 +12,34 @@ const authRouter = express.Router();
 // ------> Signup --> Create a new user account and encrypt the password before saving it to the database <----- //
 authRouter.post("/signup", async (req, res) => {
   try {
-    const user = new User(req.body);
     // Validate the data before creating the user account
     validateSignUpData(req);
 
+    // Destructure the required fields from the request body
+    const { emailId, password, ...rest } = req.body;
+
+    // Check if the user account already exists
+    const existingUser = await User.findOne({ emailId });
+
+    if (existingUser)
+      res.status(400).json({
+        message: "User already exists. Please login",
+      });
+
     // Encrypt the password before saving the user account
-    const { password } = req.body;
-    user.password = await getEncryptedPassword(password);
+    const encryptedPassword = await getEncryptedPassword(password);
+
+    const user = new User({
+      ...rest,
+      emailId,
+      password: encryptedPassword,
+    });
 
     // Save the user account to the database
     await user.save();
 
     // Send a success response to the client
-    res.status(200).json({
+    res.status(201).json({
       message: "User created successfully",
     });
   } catch (error) {

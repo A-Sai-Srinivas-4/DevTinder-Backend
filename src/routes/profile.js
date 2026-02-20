@@ -39,20 +39,20 @@ profileRouter.patch("/profile/update", userAuth, async (req, res) => {
     }
 
     // Get the logged-in user
-    const loggedUser = req.user;
+    const loggedInUser = req.user;
 
-    if (loggedUser) {
+    if (loggedInUser) {
       // Update the user profile with the provided data
       Object.keys(req.body).forEach((key) => {
-        loggedUser[key] = req.body[key];
+        loggedInUser[key] = req.body[key];
       });
 
       // Save the updated user profile to the database
-      await loggedUser.save();
+      await loggedInUser.save();
 
       res.status(200).json({
-        message: `${loggedUser.firstName} your profile updated successfully..!`,
-        data: loggedUser,
+        message: `${loggedInUser.firstName} your profile updated successfully..!`,
+        data: loggedInUser,
       });
     } else {
       res.status(404).json({
@@ -71,15 +71,15 @@ profileRouter.patch("/profile/update", userAuth, async (req, res) => {
 profileRouter.patch("/profile/password/update", userAuth, async (req, res) => {
   try {
     if (validateProfilePassword(req)) {
-      const loggedUser = req.user;
-      if (loggedUser) {
+      const loggedInUser = req.user;
+      if (loggedInUser) {
         const { newPassword } = req.body;
         // Encrypt the new password before saving it to the database
-        loggedUser.password = await getEncryptedPassword(newPassword);
+        loggedInUser.password = await getEncryptedPassword(newPassword);
 
-        loggedUser.save();
+        loggedInUser.save();
         res.status(200).json({
-          message: `${loggedUser.firstName} your profile password updated successfully...!`,
+          message: `${loggedInUser.firstName} your profile password updated successfully...!`,
         });
       }
     }
