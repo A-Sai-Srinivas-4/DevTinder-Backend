@@ -27,10 +27,10 @@ app.use(cookieParser()); // parse cookies
 
 const API = "/api";
 // Use the routes
-app.use(API, authRouter);
-app.use("/", profileRouter);
-app.use("/", requestRouter);
-app.use("/", userRouter);
+app.use(`${API}/auth`, authRouter);
+app.use(API, profileRouter);
+app.use(API, requestRouter);
+app.use(API, userRouter);
 
 // Error handling middleware
 app.use("/", (err, req, res) => {
@@ -40,7 +40,7 @@ app.use("/", (err, req, res) => {
     });
   }
 
-  return res.status(500).json({
+  return res.json({
     message: err.message,
   });
 });

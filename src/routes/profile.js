@@ -10,7 +10,7 @@ const { getEncryptedPassword } = require("../utils/common");
 // ---------->  Routes <---------- //
 
 // ------> View Profile <----- //
-profileRouter.get("/profile/view", userAuth, async (req, res) => {
+profileRouter.get("/profile", userAuth, async (req, res) => {
   try {
     const user = req.user;
 
