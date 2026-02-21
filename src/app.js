@@ -34,13 +34,8 @@ app.use(API, userRouter);
 
 // Error handling middleware
 app.use("/", (err, req, res) => {
-  if (err.status) {
-    return res.status(err.status).json({
-      message: err.message,
-    });
-  }
-
-  return res.json({
+  console.log("Global error handler", err);
+  res.status(400).json({
     message: err.message,
   });
 });
