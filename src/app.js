@@ -10,6 +10,9 @@ const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
 const userRouter = require("./routes/user");
 
+// Import the error handler
+const { errorHandler } = require("./middlewares/error.middleware");
+
 // Create an instance of Express
 const app = express();
 
@@ -32,13 +35,8 @@ app.use(API, profileRouter);
 app.use(API, requestRouter);
 app.use(API, userRouter);
 
-// Error handling middleware
-app.use("/", (err, req, res) => {
-  console.log("Global error handler", err);
-  res.status(400).json({
-    message: err.message,
-  });
-});
+// MUST be last middleware
+app.use(errorHandler);
 
 // Start the server
 connectDB()

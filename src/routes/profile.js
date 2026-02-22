@@ -29,7 +29,7 @@ profileRouter.get("/profile", userAuth, async (req, res) => {
 });
 
 // ------> Update Profile and Password Update <----- //
-profileRouter.patch("/profile/update", userAuth, async (req, res) => {
+profileRouter.patch("/profile", userAuth, async (req, res) => {
   try {
     // Validate the update request before updating the profile
     if (!validateProfileData(req)) {
@@ -68,7 +68,7 @@ profileRouter.patch("/profile/update", userAuth, async (req, res) => {
 });
 
 // ------> Update Profile Password <----- //
-profileRouter.patch("/profile/password/update", userAuth, async (req, res) => {
+profileRouter.patch("/profile/password", userAuth, async (req, res) => {
   try {
     if (validateProfilePassword(req)) {
       const loggedInUser = req.user;

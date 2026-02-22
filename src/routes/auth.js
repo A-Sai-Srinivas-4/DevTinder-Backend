@@ -73,6 +73,9 @@ authRouter.post("/login", async (req, res) => {
 
       // Send the JWT token as a response to the client in a cookie with an expiration date of 1 hour
       res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false, // true in production
         expires: new Date(Date.now() + 1 * 3600000),
       });
 

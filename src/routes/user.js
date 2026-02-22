@@ -4,7 +4,7 @@ const ConnectionRequestModel = require("../models/connectionRequest");
 const userRouter = express.Router();
 const User = require("../models/user");
 
-const USER_SAFE_DATA = "firstName lastName age gender about skills";
+const USER_SAFE_DATA = "firstName lastName age gender photoUrl about skills";
 
 // ---------->  Routes <---------- //
 

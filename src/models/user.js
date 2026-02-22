@@ -71,12 +71,14 @@ const userSchema = new mongoose.Schema(
     },
     photoUrl: {
       type: String,
-      default: "",
+      default: function () {
+        return DEFAULT_AVATAR[this.gender] || DEFAULT_AVATAR.male;
+      },
     },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Define methods for the user schema
