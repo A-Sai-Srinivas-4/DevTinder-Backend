@@ -9,7 +9,7 @@ const USER_SAFE_DATA = "firstName lastName age gender photoUrl about skills";
 // ---------->  Routes <---------- //
 
 // ------> User Requests Received <----- //
-userRouter.get("/user/requests/received", userAuth, async (req, res) => {
+userRouter.get("/requests", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
 
@@ -31,7 +31,7 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
 });
 
 // ------> User Connections <----- //
-userRouter.get("/user/connections", userAuth, async (req, res) => {
+userRouter.get("/connections", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
     // find all pending connection requests for the logged in user

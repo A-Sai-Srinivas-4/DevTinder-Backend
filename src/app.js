@@ -28,12 +28,12 @@ app.use(
 app.use(express.json()); // parse JSON request bodies
 app.use(cookieParser()); // parse cookies
 
-const API = "/api";
+
 // Use the routes
-app.use(`${API}/auth`, authRouter);
-app.use(API, profileRouter);
-app.use(API, requestRouter);
-app.use(API, userRouter);
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
+app.use("/", userRouter);
 
 // MUST be last middleware
 app.use(errorHandler);
